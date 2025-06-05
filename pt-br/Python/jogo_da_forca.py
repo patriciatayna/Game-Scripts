@@ -4,18 +4,18 @@ limite_de_erros = 6
 gameplay = 1
 
 def preenche_underlines(entrada="e", desafio="teste"):
-    underlines = "_"*len(entrada)
+    underlines = "_ "*len(entrada)
     for e in entrada:
         for d in desafio:
             for _ in underlines:
                 if e==d:
-                    underlines = underlines.replace("_", e, desafio.index(e))
+                    underlines = underlines[0].replace("_ ", e, desafio.index(e))
         print(underlines)
 
 
 while gameplay: 
     desafio = choice(lista_de_palavras)
-    letras_acertadas, letras_erradas, enforcado = [], [], False
+    letras_acertadas, letras_erradas, enforcado = ["_ "*len(desafio)], [], False
     vitoria = 0
 
     while not enforcado and not vitoria:
@@ -31,7 +31,8 @@ while gameplay:
                 underscores = preenche_underlines(entrada_jogador)
                 for letra in desafio:
                     if letra == entrada_jogador:
-                        letras_acertadas.append(letra)
+                        if letra not in letras_acertadas:
+                            letras_acertadas.insert(desafio.index(letra), letra)
             print(f'Letras acertadas: {letras_acertadas}')
             print(f'Letras erradas: {letras_erradas}')
 
@@ -48,7 +49,7 @@ while gameplay:
 # LIMITE_ERROS = 6
 
 # def mostrar_progresso(palavra, letras_certas):
-#     return ''.join([letra if letra in letras_certas else "_" for letra in palavra])
+#     return ''.join([letra if letra in letras_certas else "_ " for letra in palavra])
 
 # def solicitar_letra():
 #     return input('Digite a próxima letra: \n').lower()
@@ -62,7 +63,7 @@ while gameplay:
 #         print(f"\nPalavra: {progresso}")
 #         print(f"Letras erradas ({len(letras_erradas)}/{LIMITE_ERROS}): {', '.join(letras_erradas)}")
 
-#         if "_" not in progresso:
+#         if "_ " not in progresso:
 #             print(f"\nParabéns, você venceu o desafio acertando a palavra '{palavra}'!")
 #             return True
 
